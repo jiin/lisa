@@ -1,4 +1,4 @@
-lisa
+Lisa
 ====
 
-bring colors into music
+My high school diploma project.
