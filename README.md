@@ -85,7 +85,7 @@ Ad ogni frame il grafico si cancella e si ridisegna popolato da nuovi colori, e 
 
 Nella conclusione vorrei solo precisare che la metodologia per il calcolo del colore associato al suono è stata, almeno credo, una mia trovata.  Ciò comporta una parziale erroneità a livello fisico/scientifico, ma comunque suppongo che dal punto di vista logico/algoritmico il ragionamento sia corretto e i risultati siano soddisfacenti. 
 Ho scelto questo argomento perché sono fermamente convinto che la musica sia, talvolta, più di un'oscillazione di un corpo, come un libro è più di un insieme di lettere conseguenti e un quadro è più di un miscuglio di colori.
-L'accostamento tra colori e musica può essere meraviglioso se realizzato bene, fornire sensazioni e cercare di stimolare la sinestesia dell'individuo sono attivià benefiche per l'essere umano.
+L'accostamento tra colori e musica può essere meraviglioso se realizzato bene, fornire sensazioni e cercare di stimolare la sinestesia dell'individuo sono attività benefiche per l'essere umano.
 Ringrazio tutti i professori e tutte le altre persone che mi hanno condotto nel percorso che mi ha fatto scrivere questa tesina e programmare Lisa.js, ogni canzone ha bisogno di qualche accordo per sostenere la melodia. 
 
 Bibliografia:
