@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5" />
+
+		<title>Lisa - Bring color into music</title>
+
+		<link href='http://fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/main.css">
+
+
+	</head>
+	<body>
+		<div id="container">
+			<div id="info">
+				<div class="info-row"><div class="label">FFT Size:</div> <span id="fft_size"></span></div>
+				<div class="info-row"><div class="label">Frequency Bin Count:</div> <span id="frequency_bin_count"></span></div>
+				<div class="info-row"><div class="label">Minimum Power:</div> <span id="minimum_power"></span></div>
+				<div class="info-row"><div class="label">Maximum Power:</div> <span id="maximum_power"></span></div>
+				<div class="info-row"><div class="label">Sample Rate:</div> <span id="sample_rate"></span></div>
+				<div class="info-row"><div class="label">Background color:</div> <span id="background_color"></span></div>
+				<div class="info-row"><div class="label">Frame number:</div> <span id="frame_number"></span></div>
+				<div class="info-row"><div class="label">Bass (<span id="bass-adding">0</span> dB):</div> <input type="range" id="bass-slider" min="-40" max="40" step="1" value="0"></p></div>
+				<a id="turn-off">Turn off the lights</a> 
+			</div>
+
+			<canvas id="time"></canvas>
+			<canvas id="frequency"></canvas>
+
+			<div id="player">
+				<span id="open_playlist"><i class="fa fa-tasks"></i></span>
+				<div id="playlist"></div>
+			</div>
+		</div>
+
+ 		<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+ 		<script>
+ 		var CONFIG = {
+			music: ['yiruma', 'eminem', 'holiday', 'rebel', 'yourcall'],
+			path: 'music/',
+			frequency: true,
+			time: true,
+			showPlayer: true,
+			autoplay: true,
+			fields: ['fft_size', 'frequency_bin_count', 'minimum_power', 'maximum_power', 'background_color', 'frame_number', 'sample_rate']
+		};
+ 		</script>
+		<script src="js/lisa.js"></script>
+	</body>
+</html>

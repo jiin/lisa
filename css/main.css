@@ -1,0 +1,87 @@
+* { 
+	margin:0; padding:0; 
+}
+
+html {
+	background-color: #000;
+}
+
+html, body { 
+	width:100%; 
+	height:100%; 
+	overflow: hidden;
+}
+
+canvas { 
+	display:block; 
+	margin: 0 auto; 
+	margin-top: 5%; 
+	width: 180%; 
+	float: left;
+	position: absolute;
+}
+
+canvas#frequency {
+	padding-top: 20%;
+}
+
+div#info { 
+	color: #fff; 
+	font-size: 12px; 
+	position: absolute; 
+	right: 20px;
+	top: 10px; 
+	width: 300px;
+	padding: 5px; 
+	font-family: 'Lato', sans-serif;
+	z-index: 99999999;
+}
+
+div.label {
+	float: left;
+	width: 150px;
+}
+
+div#container div#player {
+	position: absolute;
+	top: 0;
+	left: 10px;
+}
+
+div#container div#player div#playlist {
+	position: absolute;
+	top: 45px;
+	left: 40px;
+	border: 1px solid #333;;
+	background-color: rgba(0, 0, 0, 0.9);
+	width: 288px;
+	border-radius: 6px;
+	display: none;
+	color: #FFFFFF;
+	padding: 5px;
+	font-family: monospace;
+}
+
+div#container div#player div#playlist span {
+	cursor: pointer;
+}
+
+div#container div#player div#playlist span:hover {
+	color: #fff000;
+}
+
+div#container div#player audio {
+	position: absolute;
+	left: 40px;
+	top: 13px;
+}
+
+div#container div#player i {
+	position: absolute;
+	left: 0;
+	top: 15px;
+	color: #FFF;
+	font-size: 30px;
+	margin-right: 10px;
+	cursor: pointer;
+}
