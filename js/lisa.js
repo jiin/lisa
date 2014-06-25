@@ -1,7 +1,7 @@
 /*
  *	LISA - BRING COLORS INTO MUSIC
  *
- *	 	
+ *		
  *
  *
  *
@@ -13,22 +13,22 @@
 
 	var audio = new Audio();
 
-	audio.src 		= CONFIG.path + CONFIG.music[0] + '.mp3';
+	audio.src	= CONFIG.path + CONFIG.music[0] + '.mp3';
 	audio.autoplay  = CONFIG.autoplay;
 	audio.controls  = CONFIG.showPlayer;
 
 	document.getElementById('player').appendChild(audio);
 
 	var open_playlist = document.getElementById('open_playlist');
-			 playlist = document.getElementById('playlist'),
-			 turn_off = false;
+		 playlist = document.getElementById('playlist'),
+		 turn_off = false;
 
 	Object(CONFIG.music).forEach(function (song) {
 		playlist.innerHTML += '<span onClick="selectSong(\'' + song + '\')">' + song + '</span><br>';
 	});
 
 	this.selectSong = function (songName) {
-		audio.src 	= CONFIG.path + songName + '.mp3';
+		audio.src = CONFIG.path + songName + '.mp3';
 	};
 
 	open_playlist.addEventListener('click', function(e) {
@@ -38,15 +38,15 @@
 	}, false);
 
 	var core = {
-		c: 		{},
-		ctx: 	{}
+		c:	{},
+		ctx:	{}
 	};
 
 	core.c.frequency = document.getElementById('frequency'),
-	core.c.time 	 = document.getElementById('time');
+	core.c.time	 = document.getElementById('time');
 
-	core.ctx.frequency 	= core.c.frequency.getContext('2d'),
-	core.ctx.time 		= core.c.time.getContext('2d');
+	core.ctx.frequency	= core.c.frequency.getContext('2d'),
+	core.ctx.time		= core.c.time.getContext('2d');
 
 	core.c.frequency.width  = core.c.time.width  = 2800;
 	core.c.frequency.height = core.c.time.height = 400;
@@ -62,53 +62,53 @@
 	
 	var filter  = context.createBiquadFilter();
 	
-	filter.type 			= 3;
-	filter.frequency.value 	= 440;
-	filter.Q.value			= 0;
-	filter.gain.value 		= 0;
+	filter.type		= 3;
+	filter.frequency.value	= 440;
+	filter.Q.value		= 0;
+	filter.gain.value	= 0;
 
 	document.getElementById('bass-slider').addEventListener('change', function(e) {
-        filter.gain.value = e.srcElement.value;
-        document.getElementById('bass-adding').innerHTML = filter.gain.value;
-    }, false);
+		filter.gain.value = e.srcElement.value;
+		document.getElementById('bass-adding').innerHTML = filter.gain.value;
+	}, false);
 
-    document.getElementById('turn-off').addEventListener('click', function(e) {
-    	core.c.time.style.display = 'none';
-    	document.getElementById('info').style.display = 'none'; 
-    	document.getElementById('player').style.display = 'none';
+	document.getElementById('turn-off').addEventListener('click', function(e) {
+		core.c.time.style.display = 'none';
+		document.getElementById('info').style.display = 'none'; 
+		document.getElementById('player').style.display = 'none';
 
-    	turn_off = true;
-    }, false);
+		turn_off = true;
+	}, false);
 
 	audio.addEventListener("canplay", function(e) {
 
-		var source 		= context.createMediaElementSource(audio),
-			analyser 	= context.createAnalyser();
+		var source   = context.createMediaElementSource(audio),
+		    analyser = context.createAnalyser();
 
-		var components  = {};
+		var components = {};
 
 		Object(CONFIG.fields).forEach(function(field) {
 			components[field] = document.getElementById(field);
 		});
 
-	    source.connect(analyser);
-	    source.connect(filter);
+		source.connect(analyser);
+		source.connect(filter);
 
-	    filter.connect(context.destination);
-	    analyser.connect(context.destination);
+		filter.connect(context.destination);
+		analyser.connect(context.destination);
 
-	    analyser.smoothingTimeConstant = 0.9;
+		analyser.smoothingTimeConstant = 0.9;
 
-	    components.fft_size.innerHTML = analyser.fftSize;
-	    components.frequency_bin_count.innerHTML = analyser.frequencyBinCount;
-	    components.minimum_power.innerHTML = analyser.minDecibels;
-	    components.maximum_power.innerHTML = analyser.maxDecibels;
-	    components.sample_rate.innerHTML = context.sampleRate;
+		components.fft_size.innerHTML = analyser.fftSize;
+		components.frequency_bin_count.innerHTML = analyser.frequencyBinCount;
+		components.minimum_power.innerHTML = analyser.minDecibels;
+		components.maximum_power.innerHTML = analyser.maxDecibels;
+		components.sample_rate.innerHTML = context.sampleRate;
 
-		var frequencyData 	= new Uint8Array(analyser.frequencyBinCount),
-			timeData 	  	= new Uint8Array(analyser.frequencyBinCount);
+		var frequencyData = new Uint8Array(analyser.frequencyBinCount),
+			 timeData = new Uint8Array(analyser.frequencyBinCount);
 
-		var frequencyFloat 	= new Float32Array(analyser.frequencyBinCount);
+		var frequencyFloat = new Float32Array(analyser.frequencyBinCount);
 
 		var step = 0;
 
@@ -126,7 +126,7 @@
 			analyser.getByteTimeDomainData(timeData);
 
 			var total = analyser.frequencyBinCount,
-				mid   = [];
+			    mid   = [];
 
 			var i, j, sum = 0;
 
@@ -136,15 +136,15 @@
 			analyser.getFloatFrequencyData(frequencyFloat);
 
 			var size  = frequencyFloat.length;
-				parts = parseInt(size / 3),
-				max   = Math.abs(Math.min.apply( Math, frequencyFloat ));
+			    max   = Math.abs(Math.min.apply( Math, frequencyFloat ));
+			    parts = parseInt(size / 3),
 
 			for(i = 0; i < 3; i++) {
 				sum = 0;
 
 				for(j = parts * i; j < parts * (i + 1); j++)
 					sum += frequencyFloat[j];
-					
+				
 				mid.push(
 					(turn_off) ? 0 : parseInt(((Math.abs(sum / parts) * (0.4 * (3 - i))) / max) * 255)
 				);
