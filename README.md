@@ -3,7 +3,6 @@
 
 ### 1. Introduzione
 
-
 > “ Se durante un concerto avessimo la possibilità di osservare l'aria, 
 mentre vibra simultaneamente influenzata dalle voci e dagli strumenti, 
 con grande stupore vedremmo colori organizzarsi e muoversi in essa. ” 
@@ -90,10 +89,13 @@ Ringrazio tutti i professori e tutte le altre persone che mi hanno condotto nel 
 
 Bibliografia:
 
-    Mozilla.org - developer.mozilla.org/en-US/docs/Web/API/AnalyserNode
-	Wikipedia.org – wikipedia.org
-	Relationship between light and sound - youtube.com/watch?v=cj4MOOCFspk
-	Cafepsicologico.it (Sinestesia) – cafepsicologico.it/sinestesia/
-	Corrispondenze tra suoni e colori –digilander.libero.it/initlabor/grasso1/corrispondenze1.html
+* Mozilla.org - [developer.mozilla.org/en-US/docs/Web/API/AnalyserNode](developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)
+* Wikipedia.org – [wikipedia.org](wikipedia.org)
+* Relationship between light and sound - [youtube.com/watch?v=cj4MOOCFspk](youtube.com/watch?v=cj4MOOCFspk)
+* Cafepsicologico.it (Sinestesia) – [cafepsicologico.it/sinestesia/](cafepsicologico.it/sinestesia/)
+* Corrispondenze tra suoni e colori – [digilander.libero.it/initlabor/grasso1/corrispondenze1.html](digilander.libero.it/initlabor/grasso1/corrispondenze1.html)
 
 
+### 5. Demo
+
+La demo del progetto è disponibile presso [lisa.source-code.my](http://lisa.source-code.my/ "Lisa.js - Bring color into music").
