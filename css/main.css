@@ -76,6 +76,10 @@ div#container div#player audio {
 	top: 13px;
 }
 
+a#turn-off {
+	cursor: pointer;
+}
+
 div#container div#player i {
 	position: absolute;
 	left: 0;

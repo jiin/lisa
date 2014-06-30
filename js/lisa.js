@@ -1,34 +1,34 @@
 /*
- *	LISA - BRING COLORS INTO MUSIC
- *
- *		
- *
- *
- *
- *
- *
- */
+*	LISA - BRING COLORS INTO MUSIC
+*
+*	 	
+*
+*
+*
+*
+*
+*/
 
 (function() {
 
 	var audio = new Audio();
 
-	audio.src	= CONFIG.path + CONFIG.music[0] + '.mp3';
-	audio.autoplay  = CONFIG.autoplay;
-	audio.controls  = CONFIG.showPlayer;
+	audio.src      = CONFIG.path + CONFIG.music[0] + '.mp3';
+	audio.autoplay = CONFIG.autoplay;
+	audio.controls = CONFIG.showPlayer;
 
 	document.getElementById('player').appendChild(audio);
 
 	var open_playlist = document.getElementById('open_playlist');
-		 playlist = document.getElementById('playlist'),
-		 turn_off = false;
+			playlist 			= document.getElementById('playlist'),
+			turn_off 			= false;
 
 	Object(CONFIG.music).forEach(function (song) {
 		playlist.innerHTML += '<span onClick="selectSong(\'' + song + '\')">' + song + '</span><br>';
 	});
 
 	this.selectSong = function (songName) {
-		audio.src = CONFIG.path + songName + '.mp3';
+		audio.src	= CONFIG.path + songName + '.mp3';
 	};
 
 	open_playlist.addEventListener('click', function(e) {
@@ -38,15 +38,15 @@
 	}, false);
 
 	var core = {
-		c:	{},
-		ctx:	{}
+		c: 		{},
+		ctx: 	{}
 	};
 
-	core.c.frequency = document.getElementById('frequency'),
-	core.c.time	 = document.getElementById('time');
+	core.c.frequency 	= document.getElementById('frequency'),
+	core.c.time 			= document.getElementById('time');
 
-	core.ctx.frequency	= core.c.frequency.getContext('2d'),
-	core.ctx.time		= core.c.time.getContext('2d');
+	core.ctx.frequency 	= core.c.frequency.getContext('2d'),
+	core.ctx.time 			= core.c.time.getContext('2d');
 
 	core.c.frequency.width  = core.c.time.width  = 2800;
 	core.c.frequency.height = core.c.time.height = 400;
@@ -57,15 +57,14 @@
 		alert('Sorry but AudioContext is not avalaible in this browser, update or pass to Google Chrome.');
 		return 0;
 	}
-	
-	var context = new contextClass();
-	
-	var filter  = context.createBiquadFilter();
-	
-	filter.type		= 3;
-	filter.frequency.value	= 440;
-	filter.Q.value		= 0;
-	filter.gain.value	= 0;
+
+	var context = new contextClass(),
+			filter  = context.createBiquadFilter();
+
+	filter.type = 3;
+	filter.frequency.value = 440;
+	filter.Q.value = 0;
+	filter.gain.value = 0;
 
 	document.getElementById('bass-slider').addEventListener('change', function(e) {
 		filter.gain.value = e.srcElement.value;
@@ -73,19 +72,36 @@
 	}, false);
 
 	document.getElementById('turn-off').addEventListener('click', function(e) {
-		core.c.time.style.display = 'none';
-		document.getElementById('info').style.display = 'none'; 
-		document.getElementById('player').style.display = 'none';
+		var info = document.getElementById("info").getElementsByTagName("div");
 
-		turn_off = true;
+		if (turn_off) {
+			core.c.time.style.visibility = 'visible';
+
+			for(var i = 0; i < info.length; i++)
+				info[i].style.visibility = 'visible';
+
+			document.getElementById('player').style.visibility = 'visible';
+			document.getElementById('turn-off').innerHTML = 'Turn off the lights';
+
+			turn_off = false;
+		} else {
+			core.c.time.style.visibility = 'hidden';
+
+			for(var i = 0; i < info.length; i++)
+				info[i].style.visibility = 'hidden';
+
+			document.getElementById('player').style.visibility = 'hidden';
+			document.getElementById('turn-off').innerHTML = 'Turn on the lights';
+
+			turn_off = true;
+		}
 	}, false);
 
 	audio.addEventListener("canplay", function(e) {
+		var source 		= context.createMediaElementSource(audio),
+				analyser 	= context.createAnalyser();
 
-		var source   = context.createMediaElementSource(audio),
-		    analyser = context.createAnalyser();
-
-		var components = {};
+		var components  = {};
 
 		Object(CONFIG.fields).forEach(function(field) {
 			components[field] = document.getElementById(field);
@@ -106,14 +122,14 @@
 		components.sample_rate.innerHTML = context.sampleRate;
 
 		var frequencyData = new Uint8Array(analyser.frequencyBinCount),
-			 timeData = new Uint8Array(analyser.frequencyBinCount);
+				timeData 			= new Uint8Array(analyser.frequencyBinCount);
 
 		var frequencyFloat = new Float32Array(analyser.frequencyBinCount);
 
 		var step = 0;
 
 		var update = function() {
-			
+
 			requestAnimationFrame(update);
 
 			Object(['frequency', 'time']).forEach(function (field) {
@@ -126,7 +142,7 @@
 			analyser.getByteTimeDomainData(timeData);
 
 			var total = analyser.frequencyBinCount,
-			    mid   = [];
+					mid 	= [];
 
 			var i, j, sum = 0;
 
@@ -135,16 +151,16 @@
 
 			analyser.getFloatFrequencyData(frequencyFloat);
 
-			var size  = frequencyFloat.length;
-			    max   = Math.abs(Math.min.apply( Math, frequencyFloat ));
-			    parts = parseInt(size / 3),
+			var size  = frequencyFloat.length,
+					parts = parseInt(size / 3),
+					max   = Math.abs(Math.min.apply( Math, frequencyFloat ));
 
 			for(i = 0; i < 3; i++) {
 				sum = 0;
 
 				for(j = parts * i; j < parts * (i + 1); j++)
 					sum += frequencyFloat[j];
-				
+
 				mid.push(
 					(turn_off) ? 0 : parseInt(((Math.abs(sum / parts) * (0.4 * (3 - i))) / max) * 255)
 				);
@@ -158,18 +174,16 @@
 			components.frame_number.innerHTML = step;
 
 			for(i = 0; i < analyser.frequencyBinCount; i++) {
-
 				core.ctx.frequency.fillStyle = (turn_off) ? '#e67e22' : '#fff';
 				core.ctx.frequency.fillRect(i + 250, frequencyData[i] * 1.5, 2, 2);
 
 				core.ctx.time.fillStyle = '#fff';
 				core.ctx.time.fillRect(i + 250, timeData[i], 2, 2);
-
 			}
 
 			step += 1;
 		};
 
-		update();
+	update();
 	});
 })(document);
